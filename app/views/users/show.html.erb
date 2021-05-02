@@ -1,6 +1,5 @@
 <p>
-<img src="http://upload.wikimedia.org/wikipedia/en/f/f5/Question_mark.PNG" height="200" width="200"></img>
-<a href="">edit</a>
+<%= image_tag @user.avatar.url, style: 'height:80px;width:80px;' if @user.avatar? %>
 </p>
 
 
@@ -14,8 +13,3 @@
   <%= @user.about%>
 </p>
 
-
-
-
-
-<%= link_to 'Back', users_path %>
