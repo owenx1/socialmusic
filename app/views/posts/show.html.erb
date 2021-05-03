@@ -7,9 +7,11 @@
   <p class="lead">Genre: <%= @post.genre %></p>
   <p class="lead">About the album:<br/> <%= @post.about %></p></br>
   
-  <p class="lead">
+  <p class="lead">Posted by <%= @post.user.email %></p>
+  <% if user_signed_in? && current_user == @post.user %>
     <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-secondary" %>
     <%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+  <%end%>
   <%= link_to 'Back', posts_path, class:"btn btn-secondary" %>
   <%= render @post.reviews %>
   <div class="card my-1">

@@ -12,7 +12,8 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    #@post = Post.new
+    @post = current_user.posts.build
   end
 
   # GET /posts/1/edit
@@ -21,7 +22,8 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    #@post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
@@ -49,12 +51,23 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
+    if current_user == @post.user
+        @post.destroy
+        respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
+    else
+      redirect_to root_path
+    end
   end
+
+  def correct_user
+    if !(current_user == @post.user)
+      redirect_to posts_path, notice: "Not authorised to edit this Post"
+    end
+  end
+  helper_method :correct_user
 
   private
     # Use callbacks to share common setup or constraints between actions.
