@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   #root 'home#index'
   root to: 'posts#index'
   resources :users
+  resources :reviews
   get '/myprofile' => 'users#myprofile'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

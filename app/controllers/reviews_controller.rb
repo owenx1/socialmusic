@@ -13,7 +13,11 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @post = Post.find(params[:post_id])
-    @review = @post.reviews.new(parent_id: params[:parent_id])
+    @user = current_user
+    #@user = current_user
+    #@review = @post.reviews.new(parent_id: params[:parent_id]) **
+    #@review = @post.reviews.new(parent_id: params[:parent_id])
+    @review = @user.reviews.new(:post_id => @post.id, parent_id: params[:parent_id])
   end
 
   # GET /reviews/1/edit
@@ -23,7 +27,10 @@ class ReviewsController < ApplicationController
   # POST /reviews or /reviews.json
   def create
     @post = Post.find(params[:post_id])
-    @review = @post.reviews.new(review_params)
+    @user = current_user
+    #@review = @post.reviews.new(review_params)
+    @review = @user.reviews.new(review_params.merge(post_id: @post.id))
+    #@review = @user.reviews.new(review_params)
 
     respond_to do |format|
       if @review.save
@@ -66,6 +73,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:body, :post_id, :parent_id)
+      params.require(:review).permit(:body, :parent_id, :user_id)
     end
 end
