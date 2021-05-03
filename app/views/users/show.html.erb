@@ -17,4 +17,20 @@
   <b>About Me:</b>
   <%= @user.about%>
 </p>
+	<h4><%=@user.username%>'s Reviews</h4>
+    <% @user.reviews.each do |review| %>
+      <div class="card">
+      	<div class="card-header">
+    		<h5><%=review.post.artist%>'s <%=review.post.title%></h5>
+    	</div>
+  		<div class="card-body">
+  			<%= link_to (image_tag review.post.artwork.url, style: 'height:100px;width:100px;', :title => review.post.title), review.post %>
+  			<p class="card-text"><%= review.body %></p>
+  			Review Popularity Points:<%= render 'reviews/like_count', review: review %>
+  				<%= render 'reviews/upvote_link', review: review %>
+    			<%= render 'reviews/downvote_link', review: review %>
+    	</div>
+    </div>
+    <br/>
+    <% end %>
 
