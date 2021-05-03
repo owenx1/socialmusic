@@ -12,7 +12,8 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new
+    @post = Post.find(params[:post_id])
+    @review = @post.reviews.new(parent_id: params[:parent_id])
   end
 
   # GET /reviews/1/edit

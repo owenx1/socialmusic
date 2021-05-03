@@ -1,8 +1,16 @@
-<% unless !review.persisted? %>
+<% unless review.parent_id || !review.persisted? %>
 	<div class="card">
   		<div class="card-body">
     		<%= review.body %>
+    		<%= link_to 'reply', new_post_review_path(@post, parent_id: review.id), remote: true, class: 'd-block' %>
   		</div>
 	</div>
+	<% if review.replies.any? %>
+    <% review.replies.each do |reply| %> 
+      <%= render partial: 'reviews/reply', locals: { reply: reply } %>
+    <% end %>
+    
+  <% end %>
+  <div id="reply-form-<%= review.id %>"></div>
 <% end %>
 
