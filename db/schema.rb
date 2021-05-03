@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_03_022554) do
+ActiveRecord::Schema.define(version: 2021_05_03_161535) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 2021_05_03_022554) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "about"
     t.string "avatar"
+    t.string "username"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "posts", "users"

@@ -42,6 +42,11 @@
     <%= f.text_field :about, autocomplete: "about", class:"form-control", placeholder:"About Me" %>
   </div>
 
+  <div class="field mb-3">
+    <% f.label :username %> <br />
+    <%= f.text_field :username, autocomplete: "username", class:"form-control", placeholder:"Username" %>
+  </div>
+
    <div class="field mb-3">
     <% f.label :avatar %> <br />
     <%= f.file_field :avatar, autocomplete: "avatar", class:"form-control", placeholder:"Avatar" %>

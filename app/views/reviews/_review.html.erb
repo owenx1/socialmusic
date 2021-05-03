@@ -2,9 +2,7 @@
 	<div class="card">
   		<div class="card-body">
     		<%= review.body %>
-    		<%= review.user%>
-    		<%= review.post_id%>
-    	</p>Is anything happening?</p>
+    	</p>Posted by: <%= review.user.username%></p>
     		<%= link_to 'reply', new_post_review_path(@post, parent_id: review.id), remote: true, class: 'd-block' %>
   		</div>
 	</div>
