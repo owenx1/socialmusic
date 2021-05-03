@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
 <div class="jumbotron">
   <h1><%= @post.artist %></h1>
@@ -11,6 +11,19 @@
     <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-secondary" %>
     <%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
   <%= link_to 'Back', posts_path, class:"btn btn-secondary" %>
+  <%= render @post.reviews %>
+  <div class="card my-1">
+  <div class="card-body">
+    <p class="font-weight-bold">Reviews</p>
+    <%= form_with(model: [@post, @post.reviews.build]) do |f| %>
+      <div class="form-group">
+        <%= f.label 'New Review' %>
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+</div>
 
   </p>
 </div>
