@@ -3,15 +3,23 @@
   		<div class="card-body">
     		<%= review.body %>
     	</p>Posted by: <%= review.user.username%></p>
+    	<% if current_user %>
+    <%= render 'reviews/upvote_link', review: review %>
+    <%= render 'reviews/like_count', review: review %>
+    <%= render 'reviews/downvote_link', review: review %>
+    <br/>
+  <% end %>
     		<%= link_to 'reply', new_post_review_path(@post, parent_id: review.id), remote: true, class: 'd-block' %>
   		</div>
 	</div>
+
 	<% if review.replies.any? %>
     <% review.replies.each do |reply| %> 
       <%= render partial: 'reviews/reply', locals: { reply: reply } %>
     <% end %>
-    
+    	<br/>
   <% end %>
   <div id="reply-form-<%= review.id %>"></div>
 <% end %>
+
 

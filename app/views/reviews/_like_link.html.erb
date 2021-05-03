@@ -1,0 +1,21 @@
+<%= link_to like_review_path(review), method: :patch, remote: true, id: "like-link-#{review.id}" do %>
+  <% if current_user.voted_up_on?(review) %>
+    UP voted
+    <b>
+      <%= review.cached_votes_score %>
+    </b>
+    DOWN vote
+  <% elsif current_user.voted_down_on?(review) %>
+    UP vote
+    <b>
+      <%= review.cached_votes_score %>
+    </b>
+    DOWN voted
+  <% else %>
+    UP
+    <b>
+      <%= review.cached_votes_score %>
+    </b>
+    DOWN
+  <% end %>
+<% end %>

@@ -4,4 +4,5 @@ class Review < ApplicationRecord
   	has_many    :replies, class_name: 'Review', foreign_key: :parent_id, dependent: :destroy
   	belongs_to :user
   	attr_accessor :user_id
+  	acts_as_votable
 end

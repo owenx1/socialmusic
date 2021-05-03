@@ -1,0 +1,2 @@
+document.getElementById("like-link-<%= @review.id %>").innerHTML = "<%= j render "reviews/like_link", review: @review %>";
+document.getElementById("like-count-<%= @review.id %>").innerHTML = "<%= j render "reviews/like_count", review: @review %>";

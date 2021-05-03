@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    @reviews = Review.all.order(cached_votes_score: :desc)
   end
 
   # GET /reviews/1 or /reviews/1.json
@@ -63,6 +63,40 @@ class ReviewsController < ApplicationController
       format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def like
+    @review = Review.find(params[:id])
+    if current_user.voted_up_on? @review
+      @review.downvote_by current_user
+    elsif current_user.voted_down_on? @review
+      @review.upvote_by current_user
+    else #not voted
+      @review.upvote_by current_user
+    end
+    respond_to do |format|
+     format.js
+    end 
+  end
+
+  def upvote
+    @review = Review.find(params[:id])
+    if current_user.voted_up_on? @review
+      @review.unvote_by current_user
+    else
+      @review.upvote_by current_user
+    end
+    render "vote.js.erb"
+  end
+
+  def downvote
+    @review = Review.find(params[:id])
+    if current_user.voted_down_on? @review
+      @review.unvote_by current_user
+    else
+      @review.downvote_by current_user
+    end
+    render "vote.js.erb"
   end
 
   private
