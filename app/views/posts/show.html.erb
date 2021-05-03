@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron">
+  <h1><%= @post.artist %></h1>
+  <h3><%= @post.title %></h3>
+  <%= image_tag @post.artwork.url, style: 'height:200px;width:200px;' %>
+  <p class="lead">Genre: <%= @post.genre %></p>
+  <p class="lead">About the album:<br/> <%= @post.about %></p></br>
+  
+  <p class="lead">
+    <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-secondary" %>
+    <%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+  <%= link_to 'Back', posts_path, class:"btn btn-secondary" %>
+
+  </p>
+</div>
