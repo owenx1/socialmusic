@@ -52,7 +52,7 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    if current_user == @post.user
+    if (current_user == @post.user || current_user.has_role?(:admin))
         @post.destroy
         respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
@@ -64,11 +64,18 @@ class PostsController < ApplicationController
   end
 
   def correct_user
-    if !(current_user == @post.user)
+    if !(current_user == @post.user or current_user.has_role?(:admin))
       redirect_to posts_path, notice: "Not authorised to edit this Post"
     end
   end
   helper_method :correct_user
+
+  def can_contribute
+    if !(current_user.has_role?(:contributer) || current_user.has_role?(:admin))
+      redirect_to posts_path, notice: "Not authorised to add new albums"
+    end
+  end
+  helper_method :can_contribute
 
   private
     # Use callbacks to share common setup or constraints between actions.

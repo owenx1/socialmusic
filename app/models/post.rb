@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 	has_many :reviews
 	belongs_to :user
 	attr_accessor :user_id
+	resourcify
 
 	def self.search(search)
 		if search

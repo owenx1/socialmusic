@@ -15,6 +15,8 @@ gem 'devise', '~> 4.8'
 gem 'carrierwave', '~> 2.2'
 gem 'mini_magick', '4.11'
 gem 'acts_as_votable', '~> 0.13.1'
+gem 'cancancan', '~> 3.2', '>= 3.2.1'
+gem 'rolify', '~> 6.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
