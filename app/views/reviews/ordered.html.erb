@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Leaderboard</h1>
+<br/>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">User</th>
+      <th scope="col">Album</th>
+      <th scope="col">Review</th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%count = 0%>
+    <% @reviews = Review.all.order(cached_votes_score: :desc) %>
+    <% @reviews.each do |review| %>
+      <tr>
+        <% count = count + 1%>
+        <th scope="row"><%= count %></td>
+        <td><%= review.user.username %></td>
+        <td><%= review.post.title %></td>
+        <td style="width:300px"><%= truncate(review.body, :length => 150 )%><%= link_to ' more', review %></td>
+        <td><%= render 'reviews/like_count', review: review %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
