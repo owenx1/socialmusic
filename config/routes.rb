@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/admin/reviews' => 'admin#reviews_admin'
   get '/admin/posts' => 'admin#posts_admin'
   get '/leaderboard' => 'reviews#ordered'
+  get '/about' => 'home#about'
 
   #resources :admin
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

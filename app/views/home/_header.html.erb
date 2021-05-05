@@ -5,27 +5,41 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+    	<li class="nav-item">
+          	<%= link_to 'About Us', about_path, class:"nav-link" %>
+       </li>
       <% if user_signed_in? %>
-         	<li class="nav-item">
-          		<%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
+      		<li class="nav-item">
+          		<%= link_to 'My Profile', myprofile_path, class:"nav-link" %>
        		</li>
-        	<li class="nav-item">
+       		<li class="nav-item">
+          		<%= link_to 'Top Reviews', leaderboard_path, class:"nav-link" %>
+       		</li>    
+        <% end %>
+    </ul>
+    <%= form_tag posts_path, class:"form-inline mx-auto", :method => "get" do %>
+  		<%= text_field_tag :search, params[:search], class:"form-control mr-sm-2", placeholder:"album search" %>
+  		<%= submit_tag("Search", :title => nil, class:"btn btn-outline-success my-2 my-sm-0")%>
+	<%end%>
+</ul>
+
+    <ul class="navbar-nav mr-right">
+    	<% if user_signed_in? %>
+    		<li class="nav-item">
+          		<%= link_to 'Update Profile', edit_user_registration_path, class:"nav-link" %>
+       		</li>
+       		<li class="nav-item">
          		 <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"nav-link" %>
-        	</li>	
-        	<%= image_tag current_user.avatar.url, style: 'height:50px;width:50px;' if current_user.avatar? %>
-        <% else %>
+        	</li>
+        	<%= link_to (image_tag current_user.avatar.url, style: 'height:50px;width:50px;', :title => 'My Profile'), myprofile_path %>
+         <% else %>
        		<li class="nav-item">
          	 	<%= link_to 'Sign In',  new_user_session_path, class:"nav-link" %>
         	</li>
         	<li class="nav-item">
             	<%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %>
         	</li> 
-        <% end %>
-    </ul>
-	<%= form_tag posts_path, class:"form-inline my-2 my-lg-0", :method => "get" do %>
-  		<%= text_field_tag :search, params[:search], class:"form-control mr-sm-2", placeholder:"album search" %>
-  		<%= submit_tag("Search", :title => nil, class:"btn btn-outline-success my-2 my-sm-0")%>
-	<%end%>
-
+        <%end%>
+	</ul>
   </div>
 </nav>
