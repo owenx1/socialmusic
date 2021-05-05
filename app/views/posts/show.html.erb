@@ -1,19 +1,17 @@
 <!--<p id="notice"><%= notice %></p>-->
-
+<%user_restricted%>
 <div class="jumbotron">
-  <h1><%= @post.artist %></h1>
-  <h3><%= @post.title %></h3>
-  <%= image_tag @post.artwork.url, style: 'height:200px;width:200px;' %>
-  <p class="lead">Genre: <%= @post.genre %></p>
+<%= link_to '< Back', posts_path, class:"btn btn-secondary" %>
+  <h1 class="text-center"><%= @post.artist %></h1>
+  <h3 class="text-center"><%= @post.title %></h3>
+  <%= image_tag @post.artwork.url, style: 'height:300px;width:300px;', class:"rounded mx-auto d-block" %>
+  <p class="lead text-center">Genre: <%= @post.genre %></p>
   <p class="lead">About the album:<br/> <%= @post.about %></p></br>
-  
-  <p class="lead">Posted by <%= @post.user.username %></p>
+  <p class="lead">Posted by <%= link_to @post.user.username,  @post.user %></p>
   <% if current_user == @post.user || current_user.has_role?(:admin) %>
     <%= link_to 'Edit', edit_post_path(@post), class:"btn btn-secondary" %>
     <%= link_to 'Delete', @post, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
   <%end%>
-  <%= link_to 'Back', posts_path, class:"btn btn-secondary" %>
-  <%= render @post.reviews %>
   <div class="card my-1">
   <div class="card-body">
     <p class="font-weight-bold">Reviews</p>
@@ -24,8 +22,12 @@
       </div>
       <%= f.submit 'Submit', class: 'btn btn-secondary' %>
     <% end %>
-  </div>
-</div>
 
+  </div>
+  <br/>
+  
+</div>
+<br/>
+<%= render @post.reviews %>
   </p>
 </div>

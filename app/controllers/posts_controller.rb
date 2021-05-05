@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  
 
   # GET /posts or /posts.json
   def index
@@ -9,6 +10,10 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    #before_action :authenticate_user!
+    if !(user_signed_in?)
+                  redirect_to new_user_session_path
+           end
   end
 
   # GET /posts/new

@@ -1,15 +1,19 @@
 <% unless review.parent_id || !review.persisted? %>
 	<div class="card">
   		<div class="card-body">
-    		<%= review.body %>
-    	</p>Posted by: <%= review.user.username%></p>
+  		<p><%= link_to (image_tag review.user.avatar.url, style: 'height:40px;width:40px;'), review.user if review.user.avatar?  %> <%= link_to review.user.username,  review.user %> wrote:</p>
+    		<p><%= review.body %></p>
+
     	<% if current_user %>
     <%= render 'reviews/upvote_link', review: review %>
     <%= render 'reviews/like_count', review: review %>
     <%= render 'reviews/downvote_link', review: review %>
     <br/>
   <% end %>
-    		<%= link_to 'reply', new_post_review_path(@post, parent_id: review.id), remote: true, class: 'd-block' %>
+    		<%= link_to 'reply', new_post_review_path(@post, parent_id: review.id), remote: true, class:"btn btn-secondary" %>
+    		 <% if current_user == review.user || current_user.has_role?(:admin) %>
+    			<%= link_to 'Delete', review, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+ 			 <%end%>
   		</div>
 	</div>
 

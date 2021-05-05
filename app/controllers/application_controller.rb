@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
   				end
   			end
   			helper_method :admin_restricted
+
 end

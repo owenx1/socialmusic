@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Fresh Albums</h1>
+<br/>
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
     <% @posts.each do |post| %>
@@ -8,4 +9,7 @@
     <% end %>
 </div>
 
-<%= link_to 'New Post', new_post_path %>
+<% if (user_signed_in? && current_user.has_role?(:contributer)) %>
+  <br/>
+  <%= link_to 'Add New Album', new_post_path, class:"btn btn-primary" %>
+<% end %>

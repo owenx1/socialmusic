@@ -45,24 +45,32 @@ class ReviewsController < ApplicationController
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: "Review was successfully updated." }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+    if (current_user.has_role?(:admin))
+      respond_to do |format|
+        if @review.update(review_params)
+          format.html { redirect_to @review, notice: "Review was successfully updated." }
+          format.json { render :show, status: :ok, location: @review }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @review.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_path
     end
   end
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    if (current_user == @review.user || current_user.has_role?(:admin))
+      @review.destroy
+      respond_to do |format|
+        format.html { redirect_to @review.post, notice: "Review was successfully destroyed." }
+        format.json { head :no_content }
+      end
+       else
+        redirect_to root_path
+      end
   end
 
   def like

@@ -1,6 +1,10 @@
 <div class="card ml-5">
   <div class="card-body">
+  	<p><%= link_to (image_tag reply.user.avatar.url, style: 'height:40px;width:40px;'), reply.user if reply.user.avatar?  %> <%= link_to reply.user.username,  reply.user %> wrote:</p>
     <%= reply.body %>
-    </p>Posted by: <%= reply.user.username%></p>
+    <br/><br/>
+	<% if current_user == reply.user || current_user.has_role?(:admin) %>
+	<%= link_to 'Delete', reply, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+ 	<%end%>
   </div>
 </div>
