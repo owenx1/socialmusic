@@ -1,24 +1,17 @@
 <p>
-	<%= image_tag @user.avatar.url, style: 'height:80px;width:80px;' if @user.avatar? %>
+	<%= image_tag @user.avatar.url, style: 'height:300px;width:300px;', class:"rounded mx-auto d-block" if @user.avatar? %>
 </p>
 
-<p>
-  <b>User Name:</b>
-  <%= @user.username%>
-</p>
+  <h1 class="text-center"><%= @user.username%></h1>
 
 
-<p>
-  <b>Email:</b>
-  <%= @user.email%>
-</p>
 
-<p>
-  <b>About Me:</b>
+  <h5 class="text-center"><br/>All about me: </h5>
   <%= @user.about%>
-</p>
-	<h4><%=@user.username%>'s Reviews</h4>
-    <% @user.reviews.each do |review| %>
+  <br/><br/>
+	<h4 class="text-center"><%=@user.username%>'s Reviews</h4>
+	<% @reviews = @user.reviews.all.order(cached_votes_score: :desc) %>
+    <% @reviews.each do |review| %>
       <div class="card">
       	<div class="card-header">
     		<h5><%=review.post.artist%>'s <%=review.post.title%></h5>
@@ -33,4 +26,5 @@
     </div>
     <br/>
     <% end %>
+
 

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/admin/posts' => 'admin#posts_admin'
   get '/leaderboard' => 'reviews#ordered'
   get '/about' => 'home#about'
+  #delete "users/:id" => "users#destroy"
 
   #resources :admin
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
