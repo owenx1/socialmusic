@@ -19,9 +19,9 @@
       <tr>
         <% count = count + 1%>
         <th scope="row"><%= count %></td>
-        <td><%= review.user.username %></td>
+        <td><%= link_to (image_tag review.user.avatar.url, style: 'height:40px;width:40px;'), review.user if review.user.avatar?  %> <%= link_to review.user.username,  review.user %></td>
         <td><%= review.post.title %></td>
-        <td style="width:300px"><%= truncate(review.body, :length => 150 )%><%= link_to ' more', review %></td>
+        <td style="width:300px"><%= truncate(review.body, :length => 150 )%><%= link_to ' more', review.post %></td>
         <td><%= render 'reviews/like_count', review: review %></td>
       </tr>
     <% end %>
