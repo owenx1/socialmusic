@@ -1,20 +1,13 @@
 <%admin_restricted%>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @review.body %>
-</p>
-
-<p>
-  <strong>Post:</strong>
-  <%= @review.post_id %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @review.parent_id %>
-</p>
+<h1 class="text-center"><%= @review.user.username %>'s review of <%= @review.post.title %></h1>
+<br/>
+<ul class="list-group text-center">
+  <li class="list-group-item text-center"><%= @review.body %></li>
+  <li class="list-group-item text-left">Review ID: <%= @review.id %></li>
+  <li class="list-group-item text-left">Reviewer: <%= link_to @review.user.username, @review.user %></li>
+  <li class="list-group-item text-left">Album: <%= link_to @review.post.title, @review.post %></li>
+</ul>
 
 <%= link_to 'Edit', edit_review_path(@review) %> |
 <%= link_to 'Back', posts_path %>

@@ -1,7 +1,9 @@
 <%admin_restricted%>
-<h1>Admin Dashboard</h1>
-<ul>
-  <li><%= link_to 'Manage Posts', admin_posts_path %></li>
-  <li><%= link_to 'Manage Reviews', admin_reviews_path %></li>
-  <li><%= link_to 'Manage Users', admin_users_path %></li>
+<p id="notice"><%= notice %></p>
+<%= render 'admin/admin_nav' %>
+<h1 class="text-center">Admin Dashboard</h1>
+<ul class="list-group text-center">
+  <li class="list-group-item text-center"><%= link_to 'Manage Posts', admin_posts_path %></li>
+  <li class="list-group-item text-center"><%= link_to 'Manage Reviews', admin_reviews_path %></li>
+  <li class="list-group-item text-center"><%= link_to 'Manage Users', admin_users_path %></li>
 </ul>
