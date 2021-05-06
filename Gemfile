@@ -17,6 +17,7 @@ gem 'mini_magick', '4.11'
 gem 'acts_as_votable', '~> 0.13.1'
 gem 'cancancan', '~> 3.2', '>= 3.2.1'
 gem 'rolify', '~> 6.0'
+gem 'strong_password', '~> 0.0.9'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
