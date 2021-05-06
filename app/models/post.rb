@@ -8,9 +8,9 @@ class Post < ApplicationRecord
 
 	def self.search(search)
 		if search
-			post = Post.find_by(title: search)
+			post = Post.find_by(artist: search)
 				if post
-					@posts = self.where(title: search)
+					@posts = self.where(artist: search)
 				else
 					@posts = Post.all
 				end
