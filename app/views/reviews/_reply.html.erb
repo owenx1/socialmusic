@@ -4,7 +4,7 @@
     <%= reply.body %>
     <br/><br/>
 	<% if current_user == reply.user || current_user.has_role?(:admin) %>
-	<%= link_to 'Delete', reply, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+		<%= link_to 'Delete', reply, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
  	<%end%>
   </div>
 </div>

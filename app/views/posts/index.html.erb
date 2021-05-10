@@ -1,12 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Fresh Albums</h1>
 <br/>
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
     <% @posts.each do |post| %>
-      <div class="col"><%= link_to (image_tag post.artwork.url, style: 'height:200px;width:200px;', :title => post.title), post %></div>
+      <div class="col"><br/><br/><%= link_to (image_tag post.artwork.url, style: 'height:200px;width:200px;', :title => post.title), post %></div>
     <% end %>
+    <br/>
 </div>
 
 <% if (user_signed_in? && current_user.has_role?(:contributer)) %>
